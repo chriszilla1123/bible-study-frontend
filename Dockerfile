@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 
-COPY ../../Downloads/bible-study-frontend-main .
+COPY . .
 RUN npm run build --configuration=production
 
 ################################
