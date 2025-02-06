@@ -1,0 +1,37 @@
+<div id="download-queue">
+
+  <audio controls>
+    <source src="{{mediaSource}}" type="audio/mpeg" id="audioPlayer">
+    Your browser does not support the audio element.
+  </audio> <!-- TODO move to player.component -->
+  <p-accordion [activeIndex]="[0, 1, 2]" [multiple]="true">
+    <p-accordionTab *ngFor="let playlist of playlists" header="{{playlist.name}}">
+      <div *ngFor="let media of playlist.media" class="playlist-item"(click)="setMediaSource(playlist.name, media.name)">
+        {{media.name}}
+      </div>
+    </p-accordionTab>
+<!--    <p-accordionTab header="Downloading ({{downloadQueue.inProgressDownloads.length}})">-->
+<!--      <ng-container *ngTemplateOutlet="downloadQueueTemplate; context: {list: downloadQueue.inProgressDownloads, status: downloadStatus[0]}"></ng-container>-->
+<!--    </p-accordionTab>-->
+<!--    <p-accordionTab header="In Queue ({{downloadQueue.pendingDownloads.length}})">-->
+<!--      <ng-container *ngTemplateOutlet="downloadQueueTemplate; context: {list: downloadQueue.pendingDownloads, status: downloadStatus[1]}"></ng-container>-->
+<!--    </p-accordionTab>-->
+<!--    <p-accordionTab header="History ({{downloadQueue.failedDownloads.concat(downloadQueue.completedDownloads).length}})" headerStyleClass="headerStyleClass">-->
+<!--      <ng-container *ngTemplateOutlet="downloadQueueTemplate; context: {list: downloadQueue.failedDownloads.concat(downloadQueue.completedDownloads), status: downloadStatus[2]}"></ng-container>-->
+<!--    </p-accordionTab>-->
+  </p-accordion>
+</div>
+
+<ng-template #downloadQueueTemplate let-list="list" let-status="status">
+  <div class="download-queue-container">
+    <div class="download-queue-item" *ngFor="let video of list">
+      <span class="download-queue-container-item" [pTooltip]="video.title" tooltipPosition="top">{{(video.title.length>this.queueItemTextMaxLength)? (video.title | slice:0:this.queueItemTextMaxLength)+'...':(video.title)}}</span>
+      <br *ngIf="status == downloadStatus[0]">
+      <span *ngIf="status == downloadStatus[0]" class="download-queue-item-altcolor download-queue-container-item" [pTooltip]="video.downloadStatus" tooltipPosition="top">{{(video.downloadStatus.length>this.queueItemTextMaxLength)? (video.downloadStatus | slice:0:this.queueItemTextMaxLength)+'...':(video.downloadStatus)}}</span>
+      <br>
+      <span class="download-queue-item-altcolor download-queue-container-item" [pTooltip]="video.channelName" tooltipPosition="top">{{(video.channelName.length>this.queueItemTextMaxLength)? (video.channelName | slice:0:this.queueItemTextMaxLength)+'...':(video.channelName)}}</span>
+      <br>
+      <span class="download-queue-item-altcolor download-queue-container-item" [pTooltip]="formatDownloadDate_Long(video.download_date)" tooltipPosition="top"> {{formatDownloadDate(video.download_date)}}</span>
+    </div>
+  </div>
+</ng-template>

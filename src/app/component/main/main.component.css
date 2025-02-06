@@ -1,0 +1,29 @@
+#main {
+  text-align: center;
+}
+
+#output-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+#output {
+  max-width: 95%;
+  text-align: left;
+  /* overflow: ellipsis; */
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-left: 5px;
+  padding-right: 5px;
+  font-family: monospace;
+  font-size: 12px;
+}
+
+@media only screen and (max-width: 768px) {
+  #output {
+    font-size: 9px;
+  }
+}

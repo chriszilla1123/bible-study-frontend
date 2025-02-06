@@ -1,0 +1,26 @@
+.download-queue-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: safe center;
+  gap: 10px 10px; /*row column*/
+}
+
+.download-queue-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--background-color-secondary);
+  border-radius: 5px;
+  padding: 10px;
+  max-width: 150px;
+  min-width: 150px;
+}
+
+.download-queue-item-altcolor {
+  color: var(--secondary-text-color);
+}
+
+.download-queue-container-item {
+  font-size: 14px;
+}

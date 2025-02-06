@@ -1,0 +1,13 @@
+/* PrimeNG header style .header-menubar is defined in styles.css */
+
+.site-name {
+  position: relative;
+  top: -15px;
+  color: var(--text-color);
+  font-size: 20px;
+  font-weight: bold;
+}
+
+.p-menuitem-link {
+  color: var(--text-color);
+}

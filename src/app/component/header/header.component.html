@@ -1,0 +1,14 @@
+<p-menubar styleClass="header-menubar" [model]="items">
+  <ng-template pTemplate="start">
+    <img src="favicon.ico">
+    <span class="site-name">Bible Study</span>
+  </ng-template>
+
+  <ng-template pTemplate="item" let-item>
+    <a [routerLink]="item.routerLink" class="p-menuitem-link">
+      <span [class]="item.icon"></span>
+      <span class="ml-2">{{ item.label }}</span>
+    </a>
+  </ng-template>
+
+</p-menubar>

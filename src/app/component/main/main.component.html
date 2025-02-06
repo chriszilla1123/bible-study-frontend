@@ -1,0 +1,14 @@
+<div id="main">
+  <download-options-form (formUpdate)="formUpdate($event)"></download-options-form>
+  <br>
+  <p-button type="button" (click)="start()" label="Placeholder Button" styleClass="start-download-button"
+            id="start-download-button"/>
+  <br><br>
+  <app-playlist-browser></app-playlist-browser>
+<!--  <p-dialog header="Results ({{dryRunVideos.length}})" [(visible)]="showDryRunDialog">-->
+<!--    <span *ngFor="let video of dryRunVideos">-->
+<!--      {{video.channelName}}: {{video.title}}-->
+<!--      <br>-->
+<!--    </span>-->
+<!--  </p-dialog>-->
+</div>

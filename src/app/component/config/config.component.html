@@ -1,0 +1,91 @@
+<div id="config-main">
+  <div id="config-output">
+    <h2>Channels</h2>
+    <span id="config-channel-list-header-wrapper">
+            <p-button type="button" *ngIf="!editingEnabled" label="Enable Editing" size="small"
+                      (click)="enableEditing()" class="p-button-lg"></p-button>
+            <p-button type="button" *ngIf="editingEnabled" label="Save Changes" size="small" (click)="saveChanges()"
+                      class="p-button-sm"></p-button>
+            <p-button type="button" *ngIf="editingEnabled" label="Discard Changes" size="small"
+                      (click)="discardChanges()" class="p-button-sm"></p-button>
+        </span>
+
+    <div *ngIf="!editingEnabled; else Editing" id="config-channel-list-wrapper">
+
+      <p-table [value]="channels" dataKey="id" [tableStyle]="{ }">
+        <ng-template pTemplate="header">
+          <tr>
+            <th style="width:25%">Name</th>
+            <th style="width:25%">ID/URL</th>
+            <th style="width:25%">Directory</th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-channel>
+          <tr>
+            <td class="config-table-channel-name-row">{{ channel.channelName }}</td>
+            <td class="config-table-channel-id-row">{{ channel.channelId }}</td>
+            <td class="config-table-channel-dir-row">{{ channel.channelDir }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+
+  </div>
+</div>
+
+<ng-template #Editing>
+  <div id="config-channel-list-wrapper">
+    <p-table [value]="channels" dataKey="id" [tableStyle]="{ }">
+      <ng-template pTemplate="header">
+        <tr>
+          <th style="width:25%">Name</th>
+          <th style="width:25%">ID/URL</th>
+          <th style="width:25%">Directory</th>
+          <th style="width:25%"><span class="pi pi-plus" (click)="addChannel()"></span></th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-channel let-editing="editing" let-ri="rowIndex">
+        <tr>
+          <td [pEditableColumn]="channel.channelName" pEditableColumnField="channelName"
+              class="config-table-channel-name-row">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="channel.channelName"/>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ channel.channelName }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td [pEditableColumn]="channel.channelId" pEditableColumnField="channelId"
+              class="config-table-channel-id-row">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText type="text" [(ngModel)]="channel.channelId" required/>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ channel.channelId }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td [pEditableColumn]="channel.channelDir" pEditableColumnField="channelDir"
+              class="config-table-channel-dir-row">
+            <p-cellEditor>
+              <ng-template pTemplate="input">
+                <input pInputText [(ngModel)]="channel.channelDir"/>
+              </ng-template>
+              <ng-template pTemplate="output">
+                {{ channel.channelDir }}
+              </ng-template>
+            </p-cellEditor>
+          </td>
+          <td>
+            <p-button type="button" icon="pi pi-arrow-up" size="small" (click)="moveChannelUp(ri)"></p-button>
+            <p-button type="button" icon="pi pi-arrow-down" size="small" (click)="moveChannelDown(ri)"></p-button>
+            <p-button type="button" icon="pi pi-trash" size="small" (click)="deleteChannel(ri)"></p-button>
+          </td>
+        </tr>
+      </ng-template>
+    </p-table>
+  </div>
+</ng-template>
