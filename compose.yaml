@@ -1,6 +1,6 @@
 services:
   server:
     build:
-      context: ../../Downloads/channel-archive-frontend-main
+      context: .
     ports:
       - 4200:80
