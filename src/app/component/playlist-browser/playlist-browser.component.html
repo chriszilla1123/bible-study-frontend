@@ -1,5 +1,5 @@
 <div id="playlist-browser">
-  <p-accordion [activeIndex]="[0, 1, 2]" [multiple]="true">
+  <p-accordion [multiple]="true">
     <p-accordionTab *ngFor="let playlist of playlists" header="{{playlist.name}}">
       <div *ngFor="let media of playlist.media; let mediaIndex = index" class="playlist-item" (click)="onMediaClicked(playlist, mediaIndex)">
         {{media.name}}

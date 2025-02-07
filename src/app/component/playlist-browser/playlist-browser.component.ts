@@ -12,9 +12,6 @@ import {PlayerCommunicationModel} from "../../model/player-communication.model";
 })
 export class PlaylistBrowserComponent implements OnInit{
   playlists: Playlist[] = [];
-  // mediaSource: string = "http://localhost:8080/media/fetch?playlistName=The Lord of the Rings&mediaName=01. Concerning Hobbits.mp3"; //todo move to player.component
-  mediaSource: string = "";
-  //
 
   constructor(
     private downloadService: DownloadService,

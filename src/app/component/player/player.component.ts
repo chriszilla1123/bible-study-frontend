@@ -14,6 +14,7 @@ export class PlayerComponent implements OnInit {
   queue: Playlist | null = null;
   onMediaIndex: number = 0;
   onMediaSource: string = "";
+  isLive: boolean = false;
 
   constructor(
     private configService: ConfigService,
@@ -39,5 +40,16 @@ export class PlayerComponent implements OnInit {
 
   getMediaUrl(playlistName: string, mediaName: string) {
     return this.configService.getMediaUrl(playlistName, mediaName);
+  }
+
+  stopPlayback() {
+    this.queue = null;
+    this.onMediaIndex = 0;
+    this.onMediaSource = "";
+    this.isLive = false;
+  }
+
+  startRadio() {
+    alert("Coming \"soon\" to a website near you!");
   }
 }
