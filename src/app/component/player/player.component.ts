@@ -1,28 +1,43 @@
-// import {Playlist} from "../../model/playlist.model";
-// import {ConfigService} from "../../service/config/config.service";
-// import {Media} from "../../model/media.model";
-// import {Component} from "@angular/core";
-//
-// @Component({
-//   selector: "app-player",
-//   templateUrl: "./player.component.html",
-//   styleUrls: ["./player.component.css"]
-// })
-// export class PlayerComponent {
-//   queue: Playlist = new Playlist;
-//   onMedia: number = 0;
-//
-//   constructor(
-//     private configService: ConfigService,
-//   ) {
-//
-//   }
-//
-//   getNowPlaying(): Media {
-//     return this.queue.media[this.onMedia];
-//   }
-//
-//   getMediaUrl(playlistName: string, mediaName: string) {
-//     return this.configService.getMediaUrl(playlistName, mediaName);
-//   }
-// }
+import {Playlist} from "../../model/playlist.model";
+import {ConfigService} from "../../service/config/config.service";
+import {Media} from "../../model/media.model";
+import {Component, OnInit} from "@angular/core";
+import {PlayerCommunicationService} from "../../service/player-communication/player-communication.service";
+import {PlayerCommunicationModel} from "../../model/player-communication.model";
+
+@Component({
+  selector: "app-player",
+  templateUrl: "./player.component.html",
+  styleUrls: ["./player.component.css"]
+})
+export class PlayerComponent implements OnInit {
+  queue: Playlist | null = null;
+  onMediaIndex: number = 0;
+  onMediaSource: string = "";
+
+  constructor(
+    private configService: ConfigService,
+    private playerCommunicationService: PlayerCommunicationService
+  ) {
+
+  }
+
+  ngOnInit(): void {
+    this.playerCommunicationService.event$.subscribe((data: PlayerCommunicationModel) => {
+      this.queue = data.playlist;
+      this.onMediaIndex = data.index;
+      this.onMediaSource = this.queue.media[this.onMediaIndex].src;
+    })
+  }
+
+  getNowPlaying(): Media | null {
+    if(this.queue) {
+      return this.queue.media[this.onMediaIndex];
+    }
+    return null;
+  }
+
+  getMediaUrl(playlistName: string, mediaName: string) {
+    return this.configService.getMediaUrl(playlistName, mediaName);
+  }
+}

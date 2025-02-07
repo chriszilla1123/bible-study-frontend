@@ -14,11 +14,13 @@ import {PlaylistBrowserComponent} from "./component/playlist-browser/playlist-br
 import {AccordionModule} from "primeng/accordion";
 import {TooltipModule} from "primeng/tooltip";
 import {DialogModule} from "primeng/dialog";
+import {PlayerComponent} from "./component/player/player.component";
 
 @NgModule({
   declarations: [
     HeaderComponent,
     MainComponent,
+    PlayerComponent,
     PlaylistBrowserComponent,
     LoginComponent,
     ConfigComponent,

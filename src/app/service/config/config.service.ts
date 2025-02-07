@@ -17,8 +17,15 @@ export class ConfigService {
 
   getMediaMetadata(): Observable<Playlist[]> {
     return new Observable<Playlist[]>((observer) => {
-      this.httpClient.get(environment.url + "/media").subscribe({
-        next: (response: any) => {
+      this.httpClient.get<Playlist[]>(environment.url + "/media").subscribe({
+        next: (response: Playlist[]) => {
+          response.forEach(playlist => {
+            if(playlist.media && playlist.media.length > 0) {
+              playlist.media.forEach(media => {
+                media.src = this.getMediaUrl(playlist.name, media.name);
+              })
+            }
+          })
           observer.next(response);
           observer.complete();
         },

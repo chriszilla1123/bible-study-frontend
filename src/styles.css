@@ -54,7 +54,7 @@ a.p-menubar-button {
 
 /* END MAIN.COMPONENT */
 
-/* START DOWNLOAD-QUEUE.COMPONENT */
+/* START playlist-browser.COMPONENT */
 
 p-accordion .p-accordion-header {
   padding-left: 10px;
@@ -78,7 +78,7 @@ a.p-accordion-header-link, div.p-accordion-content, div.p-dataview-content {
   color: var(--text-color);
   background: var(--background-color-main);
 }
-/* END DOWNLOAD-QUEUE.COMPONENT */
+/* END playlist-browser.COMPONENT */
 
 /* START CONFIG.COMPONENT */
 

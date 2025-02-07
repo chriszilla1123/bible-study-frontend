@@ -1,4 +1,4 @@
-.download-queue-container {
+.playlist-browser-container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -6,7 +6,7 @@
   gap: 10px 10px; /*row column*/
 }
 
-.download-queue-item {
+.playlist-browser-item {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -17,10 +17,10 @@
   min-width: 150px;
 }
 
-.download-queue-item-altcolor {
+.playlist-browser-item-altcolor {
   color: var(--secondary-text-color);
 }
 
-.download-queue-container-item {
+.playlist-browser-container-item {
   font-size: 14px;
 }
