@@ -59,6 +59,7 @@ a.p-menubar-button {
 p-accordion .p-accordion-header {
   padding-left: 10px;
   padding-right: 10px;
+  text-align: left;
 }
 
 /* Custom styles for Accordion Content */
