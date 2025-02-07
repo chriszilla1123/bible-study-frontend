@@ -15,6 +15,7 @@ import {AccordionModule} from "primeng/accordion";
 import {TooltipModule} from "primeng/tooltip";
 import {DialogModule} from "primeng/dialog";
 import {PlayerComponent} from "./component/player/player.component";
+import {FilterFileExtensionsPipe} from "./utility/filter-file-extensions.pipe";
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import {PlayerComponent} from "./component/player/player.component";
     ConfigComponent,
     LoginFormComponent,
     DownloadOptionsFormComponent,
+    FilterFileExtensionsPipe,
   ],
   imports: [
     CommonModule,
