@@ -2,8 +2,9 @@
   <audio autoplay src="{{onMediaSource}}" type="audio/mpeg" id="audioPlayer">
     Your browser does not support the audio element.
   </audio>
-  <p *ngIf="queue != null">Now Playing: {{queue != null ? (queue.media[onMediaIndex].name | filterFileExtensions) : ('')}}</p>
-  <p *ngIf="queue != null && !isLive">Playlist: {{queue.name}}</p>
+  <br *ngIf="queue != null && !isLive">
+  <p *ngIf="queue != null || radioQueue != null">Now Playing: {{nowPlayingLabel | filterFileExtensions}}</p>
+  <p *ngIf="queue != null && !isLive">Playlist: {{playlistLabel}}</p>
   <p *ngIf="isLive">Streaming Radio</p>
   <p-button type="button" (click)="stopPlayback()" label="Stop" styleClass="stop-playback-button"
             id="stop-playback-button"/>

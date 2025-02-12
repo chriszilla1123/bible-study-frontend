@@ -4,6 +4,7 @@ import {environment} from "../../../environments/environment";
 import {Channel} from "../../model/channel.model";
 import {Observable} from "rxjs";
 import {Playlist} from "../../model/playlist.model";
+import {Schedule} from "../../model/schedule";
 
 @Injectable({
   providedIn: 'root',
@@ -34,6 +35,26 @@ export class ConfigService {
           observer.error(error);
         }
       });
+    })
+  }
+
+  getRadioSchedule(): Observable<Schedule[]> {
+    return new Observable<Schedule[]>((observer) => {
+      this.httpClient.get<Schedule[]>(environment.url + "/schedule").subscribe({
+        next: (response: Schedule[]) => {
+          response.forEach(schedule => {
+            schedule.media.src = this.getMediaUrl(schedule.media.playlistName, schedule.media.name);
+            schedule.startTime = new Date(Date.parse(schedule.startTime.toString()));
+            schedule.endTime = new Date(schedule.endTime.toString());
+          })
+          observer.next(response);
+          observer.complete();
+        },
+        error: (error: unknown) => {
+          console.error(error);
+          observer.error(error);
+        }
+      })
     })
   }
 

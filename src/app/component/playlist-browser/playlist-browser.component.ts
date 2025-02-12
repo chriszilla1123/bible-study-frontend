@@ -17,7 +17,7 @@ export class PlaylistBrowserComponent implements OnInit{
     private downloadService: DownloadService,
     private configService: ConfigService,
     private changeDetectorRef: ChangeDetectorRef,
-    private playerCommunicationSerivce: PlayerCommunicationService,
+    private playerCommunicationService: PlayerCommunicationService,
   ) {
 
   }
@@ -42,7 +42,7 @@ export class PlaylistBrowserComponent implements OnInit{
 
   onMediaClicked(playlist: Playlist, mediaIndex: number) {
     // this.mediaSource = this.configService.getMediaUrl(playlistName, mediaName);
-    this.playerCommunicationSerivce.emitEvent(new PlayerCommunicationModel(playlist, mediaIndex))
+    this.playerCommunicationService.emitEvent(new PlayerCommunicationModel(playlist, mediaIndex))
   }
 
   disableRightClickOnPlayer() {
