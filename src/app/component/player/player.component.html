@@ -11,4 +11,21 @@
   <span class="player-buttons-spacer"></span>
   <p-button type="button" (click)="startRadio()" label="Radio" styleClass="start-radio-button"
             id="start-radio-button"/>
+  <span *ngIf="queue != null && !isLive">
+    <br><br>
+    <p-button type="button" (click)="skipBack()" label="-10" size="small" styleClass="stop-playback-button"
+              id="skipback-button">
+<!--      <i class="pi pi-undo"></i>-->
+    </p-button>
+    &nbsp;
+    <p-button type="button" (click)="playPause()" label="" styleClass="stop-playback-button"
+              id="playpause-button">
+      <i *ngIf="playPauseLabel == 'Play'" class="pi pi-play"></i>
+      <i *ngIf="playPauseLabel == 'Pause'" class="pi pi-pause"></i>
+    </p-button>
+    &nbsp;
+    <p-button type="button" (click)="skipForward()" label="+10" size="small" styleClass="stop-playback-button"
+              id="skipforward-button">
+    </p-button>
+  </span>
 </div>

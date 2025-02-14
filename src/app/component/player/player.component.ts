@@ -20,6 +20,7 @@ export class PlayerComponent implements OnInit {
   //UI labels
   nowPlayingLabel: string = "";
   playlistLabel: string = "";
+  playPauseLabel: string = "";
 
   constructor(
     private configService: ConfigService,
@@ -35,6 +36,7 @@ export class PlayerComponent implements OnInit {
     })
 
     this.autoPlay();
+    this.listenForPlayPause();
   }
 
   startPlaylistPlayback(model: PlayerCommunicationModel) {
@@ -44,8 +46,6 @@ export class PlayerComponent implements OnInit {
     this.isLive = false;
     this.nowPlayingLabel = this.queue.media[this.onMediaIndex].name;
     this.playlistLabel = this.queue.media[this.onMediaIndex].playlistName;
-
-    this.setPlayerControls(true);
   }
 
   startRadio() {
@@ -67,8 +67,6 @@ export class PlayerComponent implements OnInit {
         }
       }
     })
-
-    this.setPlayerControls(false);
   }
 
   stopPlayback() {
@@ -78,7 +76,6 @@ export class PlayerComponent implements OnInit {
     this.isLive = false;
     this.nowPlayingLabel = "";
     this.playlistLabel = "";
-    this.setPlayerControls(false);
   }
 
   autoPlay() {
@@ -117,10 +114,27 @@ export class PlayerComponent implements OnInit {
     }
   }
 
-  setPlayerControls(enable: boolean) {
+  listenForPlayPause() {
     const element = document.getElementById("audioPlayer") as HTMLAudioElement;
-    if (element) {
-      element.controls = enable;
+    if(element) {
+      element.addEventListener("play", () => {
+        this.playPauseLabel = "Pause"
+      });
+      element.addEventListener("pause", () => {
+        this.playPauseLabel = "Play"
+      })
     }
+  }
+
+  playPause() {
+
+  }
+
+  skipBack() {
+
+  }
+
+  skipForward() {
+
   }
 }
