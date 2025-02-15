@@ -11,6 +11,8 @@ import {Schedule} from "../../model/schedule";
   styleUrls: ["./player.component.css"]
 })
 export class PlayerComponent implements OnInit {
+  SEEK_SECONDS: number = 10;
+
   queue: Playlist | null = null;
   radioQueue: Schedule[] | null = null;
   onMediaIndex: number = 0;
@@ -21,6 +23,8 @@ export class PlayerComponent implements OnInit {
   nowPlayingLabel: string = "";
   playlistLabel: string = "";
   playPauseLabel: string = "";
+  currentMediaPositionLabel: string = "";
+  mediaDurationLabel: string = "";
 
   constructor(
     private configService: ConfigService,
@@ -37,6 +41,7 @@ export class PlayerComponent implements OnInit {
 
     this.autoPlay();
     this.listenForPlayPause();
+    this.listenForTimeAndDurationChanges();
   }
 
   startPlaylistPlayback(model: PlayerCommunicationModel) {
@@ -126,15 +131,55 @@ export class PlayerComponent implements OnInit {
     }
   }
 
-  playPause() {
+  listenForTimeAndDurationChanges() {
+    const element = document.getElementById("audioPlayer") as HTMLAudioElement;
+    if (element) {
+      element.addEventListener("timeupdate", () => {
+        this.currentMediaPositionLabel = this.convertSeconds(element.currentTime);
+      });
+      element.addEventListener("durationchange", () => {
+        this.mediaDurationLabel = this.convertSeconds(element.duration);
+      })
+    }
+  }
 
+  convertSeconds(seconds: number) {
+    seconds = Math.floor(seconds);
+    let m = Math.floor(seconds / 60);
+    let s  = seconds % 60;
+    return (m < 10 ? "0" + m : m) + ":" + (s < 10 ? "0" + s : s);
+  }
+
+  playPause() {
+    const element = document.getElementById("audioPlayer") as HTMLAudioElement;
+    if (element) {
+      if(element.paused) {
+        element.play();
+      } else {
+        element.pause();
+      }
+    }
   }
 
   skipBack() {
-
+    const element = document.getElementById("audioPlayer") as HTMLAudioElement;
+    if (element) {
+      if(element.currentTime < this.SEEK_SECONDS) {
+        element.currentTime = 0;
+      } else {
+        element.currentTime -= this.SEEK_SECONDS;
+      }
+    }
   }
 
   skipForward() {
-
+    const element = document.getElementById("audioPlayer") as HTMLAudioElement;
+    if (element) {
+      if(element.currentTime + this.SEEK_SECONDS > element.duration) {
+        element.currentTime = element.duration;
+      } else {
+        element.currentTime += this.SEEK_SECONDS;
+      }
+    }
   }
 }
